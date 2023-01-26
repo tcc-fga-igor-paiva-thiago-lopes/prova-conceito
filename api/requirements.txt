@@ -1,0 +1,7 @@
+flask
+flask-restful
+# Flask-SQLAlchemy
+# Flask-Migrate
+# psycopg2
+# psycopg2-binary
+# Flask-Ext
