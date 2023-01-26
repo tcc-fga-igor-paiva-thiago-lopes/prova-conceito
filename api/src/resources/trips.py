@@ -10,14 +10,26 @@ class Trips(Resource):
                 {
                     "id": 1,
                     "origin": "São Paulo",
-                    "destination": "Bahia",
+                    "destination": "Salvador",
                     "distance": 2455.5,
                     "cargo_type": "grãos",
                     "cargo_weight": 2300,
                     "start_date": "03/12/2022",
                     "end_date": "04/12/2022",
-                    "description": "Xablau",
-                    "company": "Jefferson Caminhõess"
+                    "description": "Soja para Salvador",
+                    "company": "Jefferson Caminhões"
+                },
+                {
+                    "id": 2,
+                    "origin": "Salvador",
+                    "destination": "Goiânia",
+                    "distance": 3455.25,
+                    "cargo_type": "grãos",
+                    "cargo_weight": 1500.75,
+                    "start_date": "05/12/2022",
+                    "end_date": "07/12/2022",
+                    "description": "Volta para Casa",
+                    "company": "T&G Transporte"
                 }         
-            ] 
+            ]
         }
