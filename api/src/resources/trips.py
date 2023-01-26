@@ -9,7 +9,15 @@ class Trips(Resource):
             "list": [
                 {
                     "id": 1,
-                    "text": "Xablau"
-                }
+                    "origin": "São Paulo",
+                    "destination": "Bahia",
+                    "distance": 2455.5,
+                    "cargo_type": "grãos",
+                    "cargo_weight": 2300,
+                    "start_date": "03/12/2022",
+                    "end_date": "04/12/2022",
+                    "description": "Xablau",
+                    "company": "Jefferson Caminhõess"
+                }         
             ] 
         }
