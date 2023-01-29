@@ -1,7 +1,0 @@
-{
-  "name": "aplicativo",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "vue"
-}
