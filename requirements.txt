@@ -1,6 +1,7 @@
 flask
 flask-restful
 flask-cors
+gunicorn
 # Flask-SQLAlchemy
 # Flask-Migrate
 # psycopg2
