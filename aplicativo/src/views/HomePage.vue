@@ -7,23 +7,23 @@
     </ion-header>
 
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Viagens</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
       <div v-if="loading">
-        <IonLoading />
+        <ion-loading />
       </div>
 
-      <div v-if="!loading">
-        <IonCard v-for="trip in trips" :key="trip.id">
-          <IonCardHeader class="trip-card-header">
-            {{trip.description}}
-          </IonCardHeader>
+      <div v-if="!loading && !loadSuccessful">
+        <ion-text color="danger">
+          <h5>Falha ao carregar as viagens...</h5>
+        </ion-text>
+      </div>
 
-          <IonCardContent>
+      <div v-if="!loading && loadSuccessful">
+        <ion-card v-for="trip in trips" :key="trip.id">
+          <ion-card-header class="trip-card-header">
+            {{trip.description}}
+          </ion-card-header>
+
+          <ion-card-content>
             <div class="pair-trip-container">
               <span><strong>Origem: </strong> {{ trip.origin }}</span>
               <span><strong>Destino: </strong> {{ trip.destination }}</span>
@@ -43,25 +43,39 @@
               <span><strong>Início: </strong> {{ trip.start_date }}</span>
               <span><strong>Fim: </strong> {{ trip.end_date }}</span>
             </div>
-          </IonCardContent>
-        </IonCard>
+          </ion-card-content>
+        </ion-card>
       </div>
     </ion-content>
   </ion-page>
 </template>
 
+<style>
+.pair-trip-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.trip-card-header {
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: bold;
+  width: fit-content;
+}
+</style>
+
 <!-- lang="ts" -->
 <script>
 import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
   IonContent,
   IonHeader,
-  IonLoading,
   IonPage,
   IonTitle,
   IonToolbar,
+  IonCard,
+  ionText,
+  IonCardHeader,
+  IonCardContent,
 } from '@ionic/vue';
 
 // interface Trip {
@@ -81,43 +95,41 @@ export default {
   data() {
     return {
       loading: false,
-      trips: [], // as Trip[],
+      loadSuccessful: true,
+      trips: [] // as Trip[],
     };
   },
   created() {
-    const apiBaseUrl = process.env.VUE_APP_API_URL || 'http://localhost:5001';
-    // const apiBaseUrl = 'http://localhost:5001';
-
-    this.loading = true;
+    const apiBaseUrl = process.env.VUE_APP_API_URL || 'https://prova-conceito.herokuapp.com';
 
     fetch(`${apiBaseUrl}/trips`)
       .then((response) => response.json())
       .then((data) => {
         console.log('request data: ', data);
         console.log('request data list: ', data.list);
+
         this.trips = [...data.list]; // as Trip[];
+
+        this.loadSuccessful = true;
       })
       .catch((error) => {
         console.log(error);
+        this.loadSuccessful = false;
       })
       .finally(() => {
         this.loading = false;
       });
   },
-  components: { IonLoading, IonCard, IonCardHeader, IonCardContent }
-};
+  components: {
+    IonContent,
+    IonHeader,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    IonCard,
+    ionText,
+    IonCardHeader,
+    IonCardContent,
+  },
+}
 </script>
-
-<style scoped>
-.pair-trip-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.trip-card-header {
-  margin: 0 auto;
-  font-size: 20px;
-  font-weight: bold;
-  width: fit-content;
-}
-</style>
