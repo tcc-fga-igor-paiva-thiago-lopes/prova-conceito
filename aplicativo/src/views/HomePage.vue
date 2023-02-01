@@ -73,7 +73,8 @@ import {
   IonTitle,
   IonToolbar,
   IonCard,
-  ionText,
+  IonText,
+  IonLoading,
   IonCardHeader,
   IonCardContent,
 } from '@ionic/vue';
@@ -102,6 +103,8 @@ export default {
   created() {
     const apiBaseUrl = process.env.VUE_APP_API_URL || 'https://prova-conceito.herokuapp.com';
 
+    this.loading = true;
+
     fetch(`${apiBaseUrl}/trips`)
       .then((response) => response.json())
       .then((data) => {
@@ -127,7 +130,8 @@ export default {
     IonTitle,
     IonToolbar,
     IonCard,
-    ionText,
+    IonText,
+    IonLoading,
     IonCardHeader,
     IonCardContent,
   },
