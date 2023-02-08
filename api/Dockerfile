@@ -5,10 +5,21 @@ ENV PYTHONPATH=/code
 
 WORKDIR /code
 
+USER root
+
+RUN apt-get update
+
+RUN apt-get install -y netcat
+
 COPY requirements.txt ./
+
+COPY entrypoint.sh ./
+
+RUN chmod +x ./entrypoint.sh
 
 RUN pip3 install -r requirements.txt
 
 COPY . ./
 
-CMD python3 server.py
+# run entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]

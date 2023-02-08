@@ -1,20 +1,18 @@
+import os
 from flask import Flask
 from flask_restful import Api
 from src.resources.trips import Trips
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
 
+app = Flask(__name__)
 
-def create_app():
-    """
-    Create the Flask app
-    """
-    app = Flask(__name__)
+app.config.from_object("src.config.Config")
 
-    cors = CORS(app, resources={r"/*": {"origins": "*"}})
+db = SQLAlchemy(app)
 
-    api = Api(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-    api.add_resource(Trips, "/trips")
+api = Api(app)
 
-
-    return app, api, None
+api.add_resource(Trips, "/trips")
