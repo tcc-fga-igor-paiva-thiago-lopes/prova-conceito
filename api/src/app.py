@@ -20,7 +20,10 @@ from src.model.truck_driver import TruckDriver
 def register_new_driver():
     request_data = request.get_json(force=True)
     
-    truck_driver = TruckDriver(name=request_data.get("name"))
+    truck_driver = TruckDriver(
+        name=request_data.get("name"),
+        email=request_data.get("email")
+    )
     truck_driver.save()
 
     return truck_driver.to_json(), requests.codes.created
