@@ -3,6 +3,8 @@ flask-restful
 flask-cors
 Flask-SQLAlchemy
 psycopg2-binary
+requests
+# SQLAlchemy
 # Flask-Migrate
 # psycopg2
 # Flask-Ext
