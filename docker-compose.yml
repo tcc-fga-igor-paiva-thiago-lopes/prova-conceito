@@ -8,9 +8,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=test-postgres-flask
+      - POSTGRES_USER=truck-app
       - POSTGRES_PASSWORD=1234
-      - POSTGRES_DB=test-postgres-flask
+      - POSTGRES_DB=truck-app
   web:
     build: ./api
     volumes:

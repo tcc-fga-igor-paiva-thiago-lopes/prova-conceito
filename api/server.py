@@ -16,5 +16,5 @@ def create_db():
 
 @cli.command("seed_db")
 def seed_db():
-    db.session.add(TruckDriver(name="John", age=25))
+    db.session.add(TruckDriver(id=1, name="John"))
     db.session.commit()
