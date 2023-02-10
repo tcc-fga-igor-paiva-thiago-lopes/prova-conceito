@@ -6,7 +6,7 @@ import SignUp from '../views/SignUp.vue';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/signup'
+    redirect: '/home'
   },
   {
     path: '/home',
