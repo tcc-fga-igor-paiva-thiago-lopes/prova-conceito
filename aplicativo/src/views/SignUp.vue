@@ -135,9 +135,8 @@
             await toast.present();
         },
         submit() {
-            // const apiBaseUrl = process.env.VUE_APP_API_URL || 'https://prova-conceito.herokuapp.com';
-
-            const apiBaseUrl = 'http://localhost:5000'
+            const apiBaseUrl = process.env.VUE_APP_API_URL || 'https://prova-conceito.herokuapp.com';
+            // const apiBaseUrl = 'http://localhost:5000'
             
             const { name, email, password, password_confirmation } = this;
 
