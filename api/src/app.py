@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import requests
 from src.controller.utils import simple_error_response
+from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__)
 
@@ -31,7 +32,7 @@ def register_new_driver():
 
     if len(missing_fields) > 0:
         return simple_error_response(
-            f"Os seguintes campos são obrigatórios: {missing_fields.join(', ')}.",
+            f"Os seguintes campos são obrigatórios: {', '.join(missing_fields)}.",
             requests.codes.unprocessable_entity
         )
 
@@ -44,6 +45,11 @@ def register_new_driver():
         )
 
         truck_driver.save()
+    except IntegrityError:
+        return simple_error_response(
+            "Email já cadastrado",
+            requests.codes.unprocessable_entity
+        )        
     except Exception as error:
         return simple_error_response(
             f"Falha ao salvar usuário: {error}",

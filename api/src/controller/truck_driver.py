@@ -3,6 +3,7 @@ from src.app import app
 from src.model import TruckDriver
 from .utils import simple_error_response
 import requests
+from sqlalchemy.exc import IntegrityError
 
 @app.route('/truck_driver', methods=['POST'])
 def register_new_driver():
@@ -18,7 +19,7 @@ def register_new_driver():
 
     if len(missing_fields) > 0:
         return simple_error_response(
-            f"Os seguintes campos são obrigatórios: {missing_fields.join(', ')}.",
+            f"Os seguintes campos são obrigatórios: {', '.join(missing_fields)}.",
             requests.codes.unprocessable_entity
         )
 
@@ -31,6 +32,11 @@ def register_new_driver():
         )
 
         truck_driver.save()
+    except IntegrityError:
+        return simple_error_response(
+            "Email já cadastrado",
+            requests.codes.unprocessable_entity
+        )        
     except Exception as error:
         return simple_error_response(
             f"Falha ao salvar usuário: {error}",
@@ -38,4 +44,3 @@ def register_new_driver():
         )
 
     return truck_driver.to_json(), requests.codes.created
-
