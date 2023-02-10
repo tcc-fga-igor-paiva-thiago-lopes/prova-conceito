@@ -42,7 +42,6 @@ class TruckDriver(db.Model, ApplicationModel):
             "name": self.name,
             "email": self.email,
             "last_sign_in_at": self.last_sign_in_at,
-            "password_digest": self.password_digest,
             "created_at": self.created_at,
             "updated_at": self.updated_at
         }
