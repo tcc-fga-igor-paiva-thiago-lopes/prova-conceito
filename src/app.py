@@ -62,3 +62,12 @@ def register_new_driver():
 with app.app_context():
     db.create_all()
     db.session.commit()
+
+
+def create_app():
+    """
+    Create the Flask app
+    """
+    global app
+
+    return app
