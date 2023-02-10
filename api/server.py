@@ -16,5 +16,12 @@ def create_db():
 
 @cli.command("seed_db")
 def seed_db():
-    db.session.add(TruckDriver(id=1, name="John"))
+    db.session.add(
+        TruckDriver(
+            name="John",
+            email="john@mail.com",
+            password="password123",
+            password_confirmation="password123"
+        )
+    )
     db.session.commit()

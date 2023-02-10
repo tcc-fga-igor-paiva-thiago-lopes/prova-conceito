@@ -20,14 +20,16 @@ class TruckDriver(db.Model, ApplicationModel):
         self.name = name
         self.email = email
         self.last_sign_in_at = last_sign_in_at
-        self.password_digest = self.generate_digest_password(password, password_confirmation)
+        self.password_digest = self.digest_password(password, password_confirmation)
 
-    def generate_digest_password(self, password, password_confirmation):
+    def digest_password(self, password, password_confirmation):
         if password != password_confirmation:
-            raise 'Password and password confirmation must be equal'
+            raise Exception('Password and password confirmation must be equal')
 
         return bcrypt.hashpw(
-            base64.b64encode(hashlib.sha256(password).digest()),
+            base64.b64encode(
+                hashlib.sha256(password.encode("utf-8")).digest()
+            ),
             bcrypt.gensalt()
         )
 
@@ -40,6 +42,7 @@ class TruckDriver(db.Model, ApplicationModel):
             "name": self.name,
             "email": self.email,
             "last_sign_in_at": self.last_sign_in_at,
+            "password_digest": self.password_digest,
             "created_at": self.created_at,
             "updated_at": self.updated_at
         }
