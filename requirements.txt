@@ -1,9 +1,12 @@
 flask
 flask-restful
 flask-cors
+Flask-SQLAlchemy
+psycopg2-binary
+requests
+bcrypt
 gunicorn
-# Flask-SQLAlchemy
+# SQLAlchemy
 # Flask-Migrate
 # psycopg2
-# psycopg2-binary
 # Flask-Ext
