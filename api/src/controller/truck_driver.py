@@ -1,22 +1,9 @@
-from flask import Flask, request
-from flask_restful import Api
-from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
+from flask import request, Blueprint
+from src.app import app
+from src.model import TruckDriver
+from .utils import simple_error_response
 import requests
-from src.controller.utils import simple_error_response
 from sqlalchemy.exc import IntegrityError
-
-app = Flask(__name__)
-
-app.config.from_object("src.config.Config")
-
-db = SQLAlchemy(app)
-
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
-api = Api(app)
-
-from src.model.truck_driver import TruckDriver
 
 @app.route('/truck_driver', methods=['POST'])
 def register_new_driver():
@@ -57,8 +44,3 @@ def register_new_driver():
         )
 
     return truck_driver.to_json(), requests.codes.created
-
-
-with app.app_context():
-    db.create_all()
-    db.session.commit()
