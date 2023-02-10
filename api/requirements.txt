@@ -4,6 +4,7 @@ flask-cors
 Flask-SQLAlchemy
 psycopg2-binary
 requests
+bcrypt
 # SQLAlchemy
 # Flask-Migrate
 # psycopg2
